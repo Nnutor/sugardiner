@@ -7,24 +7,30 @@ $error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $role = $_POST['role']; 
 
-    $stmt = $conn->prepare("SELECT * FROM user WHERE username = ?");
-    $stmt->bind_param("s", $username); // 's' specifies the variable type => 'string'
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND role = ?"); 
+    $stmt->bind_param("ss", $username, $role); 
     $stmt->execute();
     $result = $stmt->get_result();
     $user = $result->fetch_assoc();
 
     if ($user) {
-        // User found, now verify password
+        
         if (password_verify($password, $user['password'])) {
-            // Password matches
-            // Proceed with login success logic here (e.g., setting session variables)
+            
+            
             $_SESSION["user_id"] = $user["uid"];
             $_SESSION["username"] = $user["username"];
+            $_SESSION["role"] = $user["role"]; 
             
-            // Redirect to index.php after successful login
-            header("Location: index.php");
-            exit(); // Ensure that script execution stops after the redirection
+            
+    if ($user["role"] === "cook or chef") {
+        header("Location: ued.php");
+    } else {
+        header("Location: index.php");
+    }
+    exit(); 
         } else {
             $error = "Incorrect username or password.";
         }
@@ -93,8 +99,8 @@ mysqli_close($conn);
         }
 
         .center {
-            text-align: center; /* Center align text for any container */
-            margin-top: 20px; /* Optional: adds some space above the button */
+            text-align: center; 
+            margin-top: 20px; 
         }
 
         .error {
@@ -116,6 +122,11 @@ mysqli_close($conn);
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             Username: <input type="text" name="username" required><br><br>
             Password: <input type="password" name="password" required><br><br>
+            Role: 
+            <select name="role" required>
+                <option value="recipe_seeker">Recipe Seeker</option>
+                <option value="cook or chef">Cook or chef</option>
+            </select><br><br>
             <div class="center">
                 <input type="submit" value="Login">
             </div>

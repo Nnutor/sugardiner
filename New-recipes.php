@@ -33,11 +33,29 @@ mysqli_close($conn);
     <!-- Add your CSS stylesheets here -->
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+header {
+            background-color: #aeaf8f;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        
+
+        footer {
+            background-color: #aeaf8f;
+            padding: 10px;
+            text-align: center;
+        }
+</style>
 <body>
 
 <header>
-    <!-- Your header content goes here -->
-    <h1>Welcome to Sugar's Diner Recipes</h1>
+<a href="ued.php">
+        <img src="images/main Logo T.jpeg" height="100" width="200" alt="Logo" class="logo">
+    </a>
+    
     <nav>
         <!-- Navigation links -->
     </nav>
@@ -49,6 +67,7 @@ mysqli_close($conn);
     <div class="row">
         <div class="col-md-6">
             <form id="filterForm" action="New-recipes.php" method="get">
+            <h3>Welcome to Sugar's Diner Recipes</h3>
                 <label for="location">Filter by Location:</label>
                 <select id="location" name="location" class="form-control">
                     <option value="">Select Location</option>

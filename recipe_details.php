@@ -36,11 +36,31 @@ mysqli_close($conn);
     <!-- Add your CSS stylesheets here -->
     <link rel="stylesheet" href="styles.css">
 </head>
+<style>
+
+
+header {
+            background-color: #aeaf8f;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        
+        footer {
+            background-color: #aeaf8f;
+            padding: 10px;
+            text-align: center;
+        }
+
+</style>
 <body>
 
 <header>
-    <!-- Your header content goes here -->
-    <h1>Recipe Details</h1>
+<a href="New-recipes.php">
+        <img src="images/main Logo T.jpeg" height="100" width="200" alt="Logo" class="logo">
+    </a>
+   
     <nav>
         <!-- Navigation links -->
     </nav>
@@ -54,6 +74,7 @@ mysqli_close($conn);
                     <div class="card mb-4 shadow-sm">
                         <img src="<?php echo $recipe['image_path']; ?>" class="card-img-top" alt="<?php echo $recipe['recipe_name']; ?>">
                         <div class="card-body">
+                        <h3>Recipe Details</h3>
                             <h5 class="card-title"><?php echo $recipe['recipe_name']; ?></h5>
                             <p class="card-text">Ingredients: <?php echo $recipe['ingredients']; ?></p>
                             <p class="card-text">Preparations: <?php echo $recipe['preparations']; ?></p>

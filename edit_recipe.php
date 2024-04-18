@@ -1,22 +1,22 @@
 <?php
-// Include database connection file
+
 include 'connection.php';
 
-// Check if form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if recipe ID is provided in the form
+    
     if (isset($_POST['recipe_id']) && !empty($_POST['recipe_id'])) {
-        // Sanitize the input to prevent SQL injection
+        
         $recipe_id = mysqli_real_escape_string($conn, $_POST['recipe_id']);
         
-        // Retrieve recipe details from the form
+        
         $recipe_name = mysqli_real_escape_string($conn, $_POST['recipe_name']);
         $ingredients = mysqli_real_escape_string($conn, $_POST['ingredients']);
         $preparations = mysqli_real_escape_string($conn, $_POST['preparations']);
         $location = mysqli_real_escape_string($conn, $_POST['location']);
         $category = mysqli_real_escape_string($conn, $_POST['category']);
         
-        // Update the recipe in the database
+        
         $sql = "UPDATE recipes SET 
                 recipe_name = '$recipe_name',
                 ingredients = '$ingredients',
@@ -26,15 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 WHERE id = $recipe_id";
 
         if (mysqli_query($conn, $sql)) {
-            // Redirect to the recipe details page after successful update
+            
             header("Location: recipe_details.php?id=$recipe_id");
             exit();
         } else {
-            // Handle database update error
+            
             $error_message = "Error updating recipe: " . mysqli_error($conn);
         }
     } else {
-        // Handle case where no recipe ID is provided in the form
+        
         $error_message = "No recipe ID provided.";
     }
 }
@@ -77,13 +77,31 @@ mysqli_close($conn);
 
 <header>
     <!-- Your header content goes here -->
-    <h1>Edit Recipe</h1>
+    <a href="New-recipes.php">
+        <img src="images/main Logo T.jpeg" height="100" width="200" alt="Logo" class="logo">
+    </a>
+    
     <nav>
         <!-- Navigation links -->
     </nav>
 </header>
+<style>
+  
+  header {
+      background-color: #aeaf8f;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+  }
+  footer {
+            background-color: #aeaf8f;
+            padding: 10px;
+            text-align: center;
+        }
 
+  </style>
 <main>
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
@@ -91,6 +109,7 @@ mysqli_close($conn);
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <input type="hidden" name="recipe_id" value="<?php echo $recipe['id']; ?>">
                         <div class="form-group">
+                        <h3>Edit Recipe</h3>
                             <label for="recipe_name">Recipe Name</label>
                             <input type="text" class="form-control" id="recipe_name" name="recipe_name" value="<?php echo $recipe['recipe_name']; ?>">
                         </div>

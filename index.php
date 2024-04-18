@@ -229,11 +229,16 @@ h1 {
 </header>
 
 <button class="tablink" onclick="openPage('Home', this, 'pastel')"id="defaultOpen">Home</button>
+
 <button class="tablink" onclick="openPage('About', this, 'sage green')">About</button>
 <button class="tablink" onclick="openPage('Recipe', this, 'olive')">Recipes</button>
 <button class="tablink" onclick="openPage('Profile', this, 'rgb(2, 96, 2)')">Profile</button>
+<button class="tablink" onclick="window.location.href='New-recipes.php'">New Recipes</button>
+
 
 <a class="tablink" href="Logout.php">LogOut</a>
+
+
 
 
 <div id="Home" class="tabcontent">
@@ -257,8 +262,6 @@ h1 {
                 <button type="Go to Recipe">See All</button>
 
 
-                <h3>Click here to login</h3>
-               <a href="login.php" class="button">click me</a>
               
 
             </div>
@@ -309,7 +312,32 @@ h1 {
                     
         </div>
     </div>
+    
 </div>
+<!-- Filter options for location and category -->
+<div>
+        <label for="location">Location:</label>
+        <select id="location">
+            <option value="all">All Locations</option>
+            <!-- Add more location options as needed -->
+        </select>
+
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="all">All Categories</option>
+            <!-- Add more category options as needed -->
+        </select>
+
+        <button onclick="filterRecipes()">Apply Filter</button>
+    </div>
+
+    <!-- Recipe content will be dynamically updated based on filter selection -->
+    <div id="recipeContainer">
+        <!-- Initial recipe content -->
+        <?php include 'load_recipes.php'; ?>
+    </div>
+</div>
+
 
 <div id="Recipe" class="tabcontent">
   <h2>Recipe's</h2>
@@ -330,7 +358,7 @@ h1 {
       <img src="images/RicenStew.jpeg" alt="Lights" style="width:100%">
         <h3>Rice and Chunk Beef Stew</h3>
         <p>Flavoured rice with beef sauce</p>
-        <button class="button button1" onclick="window.location.href='Recipes.html'">View Recipe</button>
+        <button class="button button1" onclick="window.location.href='Recipes.php'">View Recipe</button>
       </div>
     </div>
     <div class="column">
